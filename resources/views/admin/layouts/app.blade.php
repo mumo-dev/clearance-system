@@ -49,6 +49,7 @@
                                 </li>
                             @endif
                         @else
+                           
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -73,7 +74,22 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+          <div class="container">
+            @yield('navigation')
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <ul class="list-group list-item-active">
+                    <li class="list-group-item"><a href="{{ route('admin.accounts')}}"> Manage Accounts</a></li>
+                      <li class="list-group-item"><a href=""> Faculties</a></li>
+                      <li class="list-group-item"><a href=""> Departments</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+           
         </main>
     </div>
 </body>

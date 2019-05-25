@@ -23,13 +23,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
+    
     /**
      * Create a new controller instance.
      *
@@ -68,5 +62,16 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function redirectTo(){
+        $user_type =auth()->user()->user_type;
+        if($user_type== 0){
+            return '/home';
+        }else if($user_type== 2) {
+            return '/admin';
+        }else {
+            return '/';
+        }
     }
 }
