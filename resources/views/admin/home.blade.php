@@ -2,10 +2,7 @@
 
 @section('navigation')
 <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a href="{{ route('admin.home') }}">Dashboard</a>
-    </li>
-    <li class="breadcrumb-item active">Manage Accounts</li>
+    <li class="breadcrumb-item active">Dashboard</li>
 </ol>
 
 @endsection
@@ -21,7 +18,7 @@
             </div>
         @endif
 
-        You are logged as admin!
+         Welcome to admin Dashboard!
     </div>
 </div>
 

@@ -78,8 +78,10 @@
             @yield('navigation')
             <div class="row justify-content-center">
                 <div class="col-md-3">
-                    <ul class="list-group list-item-active">
-                    <li class="list-group-item"><a href="{{ route('admin.accounts')}}"> Manage Accounts</a></li>
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <a href="{{ route('admin.accounts')}}"> Manage Accounts</a>
+                      </li>
                       <li class="list-group-item"><a href=""> Faculties</a></li>
                       <li class="list-group-item"><a href=""> Departments</a></li>
                     </ul>
