@@ -14,7 +14,7 @@
       </li>
     
       <li class="nav-item">
-        <a class="nav-link active" href="{{ route('admin.faculty')}}">
+        <a class="nav-link" href="{{ route('admin.faculty')}}">
           <span data-feather="bar-chart-2"></span>
           Faculty
         </a>
@@ -30,7 +30,7 @@
     </h6>
     <ul class="nav flex-column mb-2">
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('admin.department')}}">
+        <a class="nav-link active " href="{{ route('admin.department')}}">
           <span data-feather="layers"></span>
           View All
         </a>
@@ -80,29 +80,11 @@
             {{ session('message') }}
         </div>
       @endif
-      <div class="card">
-        <div class="card border-0">
-          <div class="card-header bg-white"> <h5 class="m-0">Add Faculty</h5></div>
-          <div class="card-body"> 
-            <form method="POST" action="{{ route('admin.add-faculty')}}">
-            @csrf
-                 <div class="form-group row">
-                  <div class="col-6">
-                    <input class="form-control" type="text"  name="name" placeholder="Faculty Name" required>
-                  </div>
-                   <div class="col-2">
-                    <input type="submit" class="btn btn-success" value="ADD">
-                  </div>
-                </div>
-            </form>
-           
-          </div>
-
-          {{--  --}}
-          <hr>
-         
+      
+      <div class="card mb-2">
+        <div class="card-body">
           <div class="p-4" >
-            <h5>List of All Faculties</h5>
+            <h5>List of Academic Departments</h5>
             <table class="table  table-sm">
               <thead>
                 <tr>
@@ -114,16 +96,48 @@
               </thead>
               <tbody>
 
-                 @foreach ($faculties as $faculty)
+                @foreach ($academicDepartments as $department)
                     <tr>
-                    <td>{{$faculty->id}}</td>
-                    <td>{{$faculty->name}}</td>
+                    <td>{{$department->id}}</td>
+                    <td>{{$department->name}}</td>
                     <td>
                         <button class="btn btn-sm btn-danger">DELETE</button>
                     </td>
                    
                     </tr> 
-                @endforeach
+                @endforeach 
+                
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+
+       <div class="card">
+        <div class="card-body">
+          <div class="p-4" >
+            <h5>List of Non-Academic Departments</h5>
+            <table class="table  table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>DELETE</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+
+                @foreach ($departments as $department)
+                    <tr>
+                    <td>{{$department->id}}</td>
+                    <td>{{$department->name}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger">DELETE</button>
+                    </td>
+                   
+                    </tr> 
+                @endforeach 
                 
             </tbody>
           </table>

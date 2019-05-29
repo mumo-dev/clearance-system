@@ -30,13 +30,13 @@
     </h6>
     <ul class="nav flex-column mb-2">
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('admin.accounts')}}">
+        <a class="nav-link " href="{{ route('admin.department')}}">
           <span data-feather="layers"></span>
           View All
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.accounts.create')}}">
+        <a class="nav-link" href="{{ route('admin.department.create')}}">
           <span data-feather="plus-square"></span>
           Add New
         </a>

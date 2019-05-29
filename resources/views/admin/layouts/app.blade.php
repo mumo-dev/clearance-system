@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
     
 
     <!-- Fonts -->
@@ -60,11 +60,25 @@
 
 
   </div>
+   <script src="{{ asset('js/app.js') }}"></script>
   <!-- Icons -->
     <script src="{{ asset('js/feather.min.js') }}"></script>
     <script>
       feather.replace()
     </script>
+
+    <script>
+   
+       $("input[name='is_academic']").click(function() {
+          var status = $(this).val();
+          if (status == 'academic') {
+              $('#faculty').addClass("d-block");
+          } else {
+              $('#faculty').removeClass("d-block");
+          }
+      });
+
+  </script>
 
     
 </body>
