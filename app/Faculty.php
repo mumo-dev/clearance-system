@@ -12,4 +12,9 @@ class Faculty extends Model
     {
         return $this->hasMany(AcademicDepartment::class);
     }
+
+    public function officers()
+    {
+        return $this->morphMany('App\ClearanceOfficer', 'officeable');
+    }
 }

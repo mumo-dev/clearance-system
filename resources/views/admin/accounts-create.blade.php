@@ -75,89 +75,89 @@
 @section('content')
 <div class="row justify-content-center">
   <div class="col-md-8">
+    @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-header bg-white text-center text-info">
-          <h5 class="m-0 font-weight-bold">Create Account For Department Head </h5> 
+          <h5 class="m-0 font-weight-bold">Create Account For Clearance Officer</h5> 
         </div>
 
         <div class="card-body">
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('admin.account.store')}}">
                 @csrf
 
-                <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                        @if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                <div class="form-group">
+                    <label for="name">{{ __('Name') }}</label>
+                    <input id="name" type="text" class="form-control" name="name"  required autofocus>
                 </div>
 
-                <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <div class="form-group">
+                    <label for="email">{{ __('E-Mail Address') }}</label>
+                    <input id="email" type="email" class="form-control" name="email" required>
 
-                    <div class="col-md-6">
-                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                <div class="form-group">
+                    <label for="password">{{ __('Password') }}</label>
+                    <input id="password" type="password" class="form-control" name="password" required>
                 </div>
 
-                <div class="form-group row">
-                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                    </div>
+                <div class="form-group">
+                    <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+ 
                 </div>
 
-                <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
+                <label for="">Head of:</label><br>
 
-                    <div class="col-md-6">
-                        <select  class="form-control" name="department">
-                            <option selected disabled>Choose ...</option>
-                            <option value="nursing">Nursing</option>
-                            <option value="laboratory">Laboratory</option>
-                            <option value="radiology">Radiology</option>
-                            <option value="treatment">Treatment</option>
-                            <option value="optical">Optical</option>
-                            <option value="reception">Reception</option>
-                        </select>
-
-                        @if ($errors->has('department'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('department') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"  id="inlineRadio2" name="department_choice" value="faculty" required>
+                    <label class="form-check-label" for="inlineRadio2">Faculty</label>
                 </div>
-                
 
-                
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineRadio1" name="department_choice" value="academicdepartment" required>
+                    <label class="form-check-label" for="inlineRadio1">Academic Department</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineRadio3" name="department_choice" value="department" required>
+                    <label class="form-check-label" for="inlineRadio1">Non-Academic Department</label>
+                </div>
+
+
+                <div class="form-group d-none" id="faculty">
+                    <label for="name">Faculty:</label>
+                    <select class="form-control" name="faculty">
+                        <option value="" selected disabled>choose faculty...</option>
+                        @foreach ($faculties as $faculty)
+                              <option value="{{ $faculty->id}}">{{ $faculty->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group d-none" id="academicdepartment">
+                    <label for="name">Academic Department:</label>
+                    <select class="form-control" name="academicdepartment">
+                        <option value="" selected disabled>choose department...</option>
+                        @foreach ($academicDepartments as $department)
+                              <option value="{{ $department->id}}">{{ $department->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group d-none" id="department">
+                    <label for="name">Non-Academic Department:</label>
+                    <select class="form-control" name="department">
+                        <option value="" selected disabled>choose department...</option>
+                        @foreach ($nonAcademicdepartments as $department)
+                              <option value="{{ $department->id}}">{{ $department->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">

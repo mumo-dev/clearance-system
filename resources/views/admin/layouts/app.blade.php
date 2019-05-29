@@ -78,6 +78,32 @@
           }
       });
 
+      
+       $("input[name='department_choice']").click(function() {
+          var status = $(this).val();
+          if (status == 'department') {
+
+              $('#faculty').removeClass("d-block");
+              $('#academicdepartment').removeClass("d-block");
+              $('#department').addClass("d-block")
+
+
+          } else if(status =='faculty'){
+            
+                $('#faculty').addClass("d-block");
+                $('#department').removeClass("d-block");
+                $('#academicdepartment').removeClass("d-block");
+          }else if(status =='academicdepartment'){
+
+                $('#academicdepartment').addClass("d-block");
+                $('#faculty').removeClass("d-block");
+                $('#department').removeClass("d-block");
+              
+        }
+
+          //academicdepartment
+      });
+
   </script>
 
     

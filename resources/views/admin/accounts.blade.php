@@ -74,6 +74,11 @@
 
 @section('content')
 <div class="card">
+  @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
+  @endif
   <div class="card-header bg-white">All Accounts </div>
   <div class="card-body">
       <div class="table-responsive">
@@ -88,14 +93,15 @@
               </thead>
               <tbody>
 
-                {{-- @foreach ($users as $user)
+              @foreach ($accounts as $account)
                     <tr>
-                    <td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                    <td>{{$user->department}}</td>
+                    <td>{{$account->user->id}}</td>
+                    <td>{{$account->user->name}}</td>
+                    <td>{{$account->user->email}}</td>
+                    <td>{{$account->department}}</td>
+                   
                     </tr> 
-                @endforeach --}}
+              @endforeach 
                 
             </tbody>
         </table>

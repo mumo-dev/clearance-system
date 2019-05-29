@@ -8,7 +8,9 @@ class Department extends Model
 {
     protected $fillable =['name'];
 
+    public function officers()
+    {
+        return $this->morphMany('App\ClearanceOfficer', 'officeable');
+    }
     
-
-
 }

@@ -31,6 +31,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'admin']], function(){
     Route::get('/faculty', 'Admin\AccountsController@faculty')->name('admin.faculty');
     Route::post('/faculty', 'Admin\AccountsController@addFaculty')->name('admin.add-faculty');
     Route::get('/accounts', 'Admin\AccountsController@index')->name('admin.accounts');
+
+    Route::post('/accounts', 'Admin\AccountsController@storeAccount')->name('admin.account.store');
     Route::get('/accounts/create', 'Admin\AccountsController@create')->name('admin.accounts.create');
 
     Route::get('/departments', 'Admin\AccountsController@department')->name('admin.department');
