@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Faculty;
+use App\AcademicDepartment;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['getDepartments']);
     }
 
     /**
@@ -24,5 +27,19 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+
+    public function profile()
+    {
+        $faculties = Faculty::all();
+        return view('profile', compact('faculties'));
+    }
+
+    public function getDepartments($id)
+    {
+        $faculty = Faculty::find($id);
+        $departments = $faculty->departments;
+        return $departments;
     }
 }

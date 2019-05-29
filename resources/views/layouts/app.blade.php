@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -75,6 +74,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+ <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" ></script>
+        @yield('scripts')
+       
     </div>
 </body>
 </html>

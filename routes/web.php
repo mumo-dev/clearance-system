@@ -17,10 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/faculties/{id}', 'HomeController@getDepartments');
 
 //student routes
 Route::group(['middleware'=>['auth', 'student']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/profile', 'HomeController@profile');
+});
+
+Route::group(['middleware'=>['auth', 'department']], function(){
+    Route::get('/department', 'DepartmentController@index');
 });
 
 

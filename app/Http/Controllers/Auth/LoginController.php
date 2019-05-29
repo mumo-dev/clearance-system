@@ -44,7 +44,7 @@ class LoginController extends Controller
         }else if($user_type== 2) {
             return '/admin';
         }else {
-            return '/';
+            return '/department';
         }
     }
 }
