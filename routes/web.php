@@ -22,8 +22,13 @@ Route::get('/faculties/{id}', 'HomeController@getDepartments');
 //student routes
 Route::group(['middleware'=>['auth', 'student']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/profile', 'HomeController@profile');
+    Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::post('/profile', 'HomeController@saveProfile')->name('profile.create');
+
+    Route::get('api/clearance/faculty/{id}', 'ClearanceController@checkFacultyStatus');
+    Route::get('api/clearance/department/{id}', 'ClearanceController@checkDepartmentStatus');
+    Route::post('api/clearance/faculty/{id}', 'ClearanceController@updateFacultyClearance');
+    Route::post('api/clearance/department/{id}', 'ClearanceController@updateDepartmentClearance');
     
 });
 

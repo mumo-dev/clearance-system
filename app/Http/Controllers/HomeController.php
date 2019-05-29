@@ -28,7 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $student = Student::where('user_id', auth()->user()->id)->get();
+        if($student == null){
+            return redirect()->route('profile');
+        }
+
         $departments = Department::all();
+
         
         return view('home', compact('departments'));
     }

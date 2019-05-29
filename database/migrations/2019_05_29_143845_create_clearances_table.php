@@ -17,7 +17,7 @@ class CreateClearancesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('student_id');
             $table->string('status')->default('pending');
-            $table->text('remarks')->nulable();
+            $table->text('remarks')->nullable();
             $table->unsignedBigInteger('clearance_officer_id')->nullable();
             $table->morphs('departmentable');
             $table->timestamps();
