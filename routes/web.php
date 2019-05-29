@@ -33,7 +33,8 @@ Route::group(['middleware'=>['auth', 'student']], function(){
 });
 
 Route::group(['middleware'=>['auth', 'department']], function(){
-    Route::get('/department', 'DepartmentController@index');
+    Route::get('/department', 'DepartmentController@index')->name('department.home');
+    Route::get('/department/reports', 'DepartmentController@reports')->name('department.reports');
 });
 
 

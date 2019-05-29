@@ -1,23 +1,60 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
+
+@section('sidebar')
+  
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="{{route('department.home')}}">
+          <span data-feather="home"></span>
+            Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('department.reports')}}">
+          <span data-feather="bar-chart-2"></span>
+          Reports
+        </a>
+      </li>
+    
+    </ul>
+
+    
+  </div>
+</nav>
+@endsection
+
+@section('header-title')
+  <h6 class="text-white text-uppercase">{{$department_title}}</h6>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged as department in!
-                </div>
-            </div>
+<div class="card">
+  @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
         </div>
-    </div>
+  @endif
+  <div class="card-header bg-white">Students Requesting for Clearance </div>
+  <div class="card-body">
+  @forelse($clearances as $clearance)
+        <ul class="list-group">
+         
+            <a  class="list-group-item list-group-item-action" href="#"> 
+                {{ $clearance->student->user->name }} - {{ $clearance->student->regno}}
+                at {{ $clearance->created_at}} 
+            </a>
+         
+        </ul>
+  @empty
+        <h4>No Clearances Requested yet</h4>
+  @endforelse
+     
+ </div>
+  </div>
+
 </div>
 @endsection
