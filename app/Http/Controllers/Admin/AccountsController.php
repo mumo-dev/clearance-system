@@ -11,4 +11,9 @@ class AccountsController extends Controller
     {
         return view('admin.accounts');
     }
+
+    public function create()
+    {
+        return view('admin.accounts-create');
+    }
 }
