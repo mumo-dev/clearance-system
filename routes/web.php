@@ -23,6 +23,8 @@ Route::get('/faculties/{id}', 'HomeController@getDepartments');
 Route::group(['middleware'=>['auth', 'student']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/profile', 'HomeController@profile');
+    Route::post('/profile', 'HomeController@saveProfile')->name('profile.create');
+    
 });
 
 Route::group(['middleware'=>['auth', 'department']], function(){

@@ -17,4 +17,9 @@ class AcademicDepartment extends Model
     {
         return $this->morphMany('App\ClearanceOfficer', 'officeable');
     }
+
+    public function clearances()
+    {
+        return $this->morphMany('App\Clearance', 'departmentable');
+    }
 }

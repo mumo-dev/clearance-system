@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Faculty;
 use App\AcademicDepartment;
+use App\Student;
+use App\Department;
 
 class HomeController extends Controller
 {
@@ -26,7 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $departments = Department::all();
+        
+        return view('home', compact('departments'));
     }
 
 
@@ -41,5 +45,24 @@ class HomeController extends Controller
         $faculty = Faculty::find($id);
         $departments = $faculty->departments;
         return $departments;
+    }
+
+
+    public function saveProfile(Request $request)
+    {
+        $this->validate($request,[
+            'regno'=>'required|string|regex:/^([A-Z])+([0-9])+\/([0-9]){5}\/([0-9]){2}$/i'
+        ]);
+
+        Student::create([
+            'user_id'=>auth()->user()->id,
+            'regno'=>$request->regno,
+            'course'=>$request->course,
+            'faculty_id'=> $request->faculty,
+            'department_id'=>$request->department
+        ]);
+
+        return redirect()->route('home')->withMessage('Student Profile updated');
+
     }
 }

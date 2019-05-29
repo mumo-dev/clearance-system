@@ -14,21 +14,26 @@
                         </div>
                     @endif
 
-                    <form>
-                  
+                    <form method="post" action={{ route('profile.create')}}>
+                        @csrf
                         <div class="form-group">
                             <label>Name:</label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="name" class="form-control" value={{Auth::user()->name}} disabled>
                         </div>
 
-                         <div class="form-group">
+                        <div class="form-group">
                             <label>Registration Number:</label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="regno" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required>
+                             @if ($errors->has('regno'))
+                                  <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('regno') }}</strong>
+                                  </span>
+                            @endif
                         </div>
 
                         <div class="form-group">
                             <label>Faculty:</label>
-                            <select name="faculty" class="form-control" id="sel_faculty" onchange="fetchDepartment()">
+                            <select name="faculty" class="form-control" id="sel_faculty" onchange="fetchDepartment()" required>
                                 <option value="" selected disabled>Choose ...</option>
                                 @foreach ($faculties as $faculty)
                                     <option value="{{ $faculty->id}}">{{ $faculty->name }} </option>
@@ -38,10 +43,15 @@
 
                         <div class="form-group">
                             <label>Department:</label>
-                            <select name="department" class="form-control" id="sel_depart">
+                            <select name="department" class="form-control" id="sel_depart" required>
                                 <option value="" selected disabled>Choose ...</option>
                                
                             </select>
+                        </div>
+
+                         <div class="form-group">
+                            <label>Course:</label>
+                            <input type="text" name="course" class="form-control" placeholder="eg. Bsc. Computer Science" required>
                         </div>
 
                         <div class="form-group">
