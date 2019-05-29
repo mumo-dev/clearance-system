@@ -14,9 +14,9 @@
       </li>
     
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.faculty')}}">
           <span data-feather="bar-chart-2"></span>
-          Reports
+          Faculty
         </a>
       </li>
     

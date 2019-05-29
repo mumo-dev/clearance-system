@@ -28,6 +28,10 @@ Route::group(['middleware'=>['auth', 'student']], function(){
 //admin routes
 Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'admin']], function(){
     Route::get('/', 'Admin\HomeController@index')->name('admin.home');
+    Route::get('/faculty', 'Admin\AccountsController@faculty')->name('admin.faculty');
+    Route::post('/faculty', 'Admin\AccountsController@addFaculty')->name('admin.add-faculty');
     Route::get('/accounts', 'Admin\AccountsController@index')->name('admin.accounts');
     Route::get('/accounts/create', 'Admin\AccountsController@create')->name('admin.accounts.create');
+
+    // 
 });
