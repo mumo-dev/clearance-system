@@ -35,6 +35,8 @@ Route::group(['middleware'=>['auth', 'student']], function(){
 Route::group(['middleware'=>['auth', 'department']], function(){
     Route::get('/department', 'DepartmentController@index')->name('department.home');
     Route::get('/department/reports', 'DepartmentController@reports')->name('department.reports');
+    Route::get('/department/clear/{id}', 'DepartmentController@clearStudent');
+    Route::post('/department/clear/', 'DepartmentController@updateClearanceStatus')->name('department.clear');
 });
 
 

@@ -32,25 +32,26 @@
 @endsection
 
 @section('content')
+ @if (session('message'))
+      <div class="alert alert-success" role="alert">
+          {{ session('message') }}
+      </div>
+@endif
 <div class="card">
-  @if (session('message'))
-        <div class="alert alert-success" role="alert">
-            {{ session('message') }}
-        </div>
-  @endif
+ 
   <div class="card-header bg-white">Students Requesting for Clearance </div>
   <div class="card-body">
   @forelse($clearances as $clearance)
         <ul class="list-group">
          
-            <a  class="list-group-item list-group-item-action" href="#"> 
+            <a  class="list-group-item list-group-item-action" href="{{'/department/clear/'. $clearance->id}}"> 
                 {{ $clearance->student->user->name }} - {{ $clearance->student->regno}}
                 at {{ $clearance->created_at}} 
             </a>
          
         </ul>
   @empty
-        <h4>No Clearances Requested yet</h4>
+        <h6>No Clearances Requested yet</h6>
   @endforelse
      
  </div>
