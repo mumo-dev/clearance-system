@@ -36,6 +36,8 @@ class DepartmentController extends Controller
            
         }
 
+        //
+
         $clearances =Clearance::with('student')
                     ->where('departmentable_type',$incharge->officeable_type)
                     ->where('departmentable_id',$incharge->officeable_id)
@@ -47,7 +49,33 @@ class DepartmentController extends Controller
 
     public function reports()
     {
-       
+        $user = auth()->user();
+        $incharge = $user->inchargeOf;
+
+        if($incharge->officeable_type=="App\Faculty"){
+
+            $faculty_name = Faculty::find($incharge->officeable_id)->name;
+            $department_title = 'Faculty - '. $faculty_name;
+
+        }else if($incharge->officeable_type=="App\AcademicDepartment"){
+            $department_name = AcademicDepartment::find($incharge->officeable_id)->name;
+            $department_title = 'Department - '. $department_name;
+
+          
+        }else if($incharge->officeable_type=="App\Department"){
+            $department_name = Department::find($incharge->officeable_id)->name;
+            $department_title = 'Department - '. $department_name; 
+        }
+
+        $reports = Clearance::with(['student','clearedBy'])
+                            ->where("departmentable_type",$incharge->officeable_type)
+                            ->where("departmentable_id", $incharge->officeable_id)
+                            ->get();
+
+
+                        
+        // return ;
+        return view('departments.report', compact('reports','department_title'));
     }
 
     public function clearStudent($id)
@@ -97,7 +125,7 @@ class DepartmentController extends Controller
 
         $clearance = Clearance::findOrFail($id);
         $clearance->status = $status;
-        $clearance->clearance_officer_id = auth()->user()->id;
+        $clearance->clearance_officer_id = auth()->user()->inchargeOf->id;
         $clearance->remarks = trim($remarks);
         $clearance->save();
 
