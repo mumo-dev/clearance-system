@@ -44,8 +44,8 @@
   @forelse($clearances as $clearance)
         <ul class="list-group">
          
-            <a  class="list-group-item list-group-item-action" href="{{'/department/clear/'. $clearance->id}}"> 
-                {{ $clearance->student->user->name }} - {{ $clearance->student->regno}}
+             <a  class="list-group-item list-group-item-action" href="{{'/department/clear/'. $clearance->id}}"> 
+                {{-- {{ $clearance->student->user->name }} -  --}} {{ $clearance->student->regno}}
                 at {{ $clearance->created_at}} 
             </a>
          

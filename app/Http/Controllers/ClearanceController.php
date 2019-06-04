@@ -12,7 +12,7 @@ class ClearanceController extends Controller
 {
    public function checkFacultyStatus($id)
    {
-       $clearance = Clearance::where('student_id', auth()->user()->id)
+       $clearance = Clearance::where('student_id', auth()->user()->student->id)
                               ->where('departmentable_type', 'App\Faculty')
                               ->where('departmentable_id', $id)
                               ->first();
@@ -34,8 +34,8 @@ class ClearanceController extends Controller
    {
         //departmentable_type 	departmentable_id
     
-        $type = $request->query('academic')== 'true' ? 'App\AcademicDepartment': 'Department';
-        $clearance = Clearance::where('student_id', auth()->user()->id)
+        $type = $request->query('academic')== 'true' ? 'App\AcademicDepartment': 'App\Department';
+        $clearance = Clearance::where('student_id', auth()->user()->student->id)
                               ->where('departmentable_type', $type)
                               ->where('departmentable_id', $id)
                               ->first();
@@ -57,7 +57,7 @@ class ClearanceController extends Controller
    {
        $faculty = Faculty::find($id);
        $clearance = $faculty->clearances()->create([
-           'student_id'=>auth()->user()->id,
+           'student_id'=>auth()->user()->student->id,
            'status'=>'pending'
        ]);
 
@@ -78,7 +78,7 @@ class ClearanceController extends Controller
        }
 
        $clearance = $department->clearances()->create([
-            'student_id'=>auth()->user()->id,
+            'student_id'=>auth()->user()->student->id,
             'status'=>'pending'
         ]);
 

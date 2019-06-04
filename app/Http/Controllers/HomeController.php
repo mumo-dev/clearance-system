@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $student = Student::where('user_id', auth()->user()->id)->get();
+        $student = Student::where('user_id', auth()->user()->id)->first();
         if($student == null){
             return redirect()->route('profile');
         }

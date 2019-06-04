@@ -44,6 +44,8 @@ class DepartmentController extends Controller
                     ->where('status', '!=', 'Cleared')
                     ->orderBy('updated_at')
                     ->get();
+
+
         return view('departments.index', compact('clearances','department_title'));
     }
 

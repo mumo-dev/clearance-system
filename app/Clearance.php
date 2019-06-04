@@ -15,7 +15,7 @@ class Clearance extends Model
 
     public function student()
     {
-        return $this->belongsTo('App\Student');
+        return $this->belongsTo('App\Student', 'student_id');
     }
 
     public function clearedBy()
