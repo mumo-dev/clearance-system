@@ -60,6 +60,30 @@ class AccountsController extends Controller
         return redirect()->back()->withMessage('Faculty added successfully');
     }
 
+    public function deleteFaculty(Request $request)
+    {
+        $faculty = Faculty::find($request->id);
+        $faculty->delete();
+
+        return redirect()->back();
+    }
+
+    public function deleteAcademicDepartment(Request $request)
+    {
+        $department = AcademicDepartment::find($request->id);
+        $department->delete();
+
+        return redirect()->back();
+    }
+
+    public function deleteDepartment(Request $request)
+    {
+        $department = Department::find($request->id);
+        $department->delete();
+
+        return redirect()->back();
+    }
+
     public function department()
     {
         $academicDepartments = AcademicDepartment::all();
@@ -79,7 +103,7 @@ class AccountsController extends Controller
         $name = $request->name;
         $is_academic = $request->is_academic;
         $faculty = $request->faculty;
-      
+
         if($is_academic == 'academic' && $faculty == ''){
             return redirect()->back()->withMessage('Please choose faculty field');
         }
@@ -97,12 +121,13 @@ class AccountsController extends Controller
         }
 
         return redirect()->route('admin.department')->withMessage('Department successfully added');
-       
+
     }
 
     public function storeAccount(Request $request)
     {
-        $name = $request->name;
+        $first_name = $request->first_name;
+        $last_name = $request->last_name;
         $email = $request->email;
         $password = $request->password;
         $password_confirmation = $request->password_confirmation;
@@ -121,7 +146,8 @@ class AccountsController extends Controller
             }else {
 
                 $user = User::create([
-                    'name'=>$name,
+                    'first_name'=>$first_name,
+                    'last_name'=>$last_name,
                     'email'=>$email,
                     'password' => Hash::make($password),
                     'user_type'=>1
@@ -143,7 +169,8 @@ class AccountsController extends Controller
             }else {
 
                 $user = User::create([
-                    'name'=>$name,
+                    'first_name'=>$first_name,
+                    'last_name'=>$last_name,
                     'email'=>$email,
                     'password' => Hash::make($password),
                     'user_type'=>1
@@ -166,7 +193,8 @@ class AccountsController extends Controller
                 return redirect()->back()->withMessage('Please choose department ');
             }else {
                 $user = User::create([
-                    'name'=>$name,
+                    'first_name'=>$first_name,
+                    'last_name'=>$last_name,
                     'email'=>$email,
                     'password' => Hash::make($password),
                     'user_type'=>1

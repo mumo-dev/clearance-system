@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('sidebar')
-  
+
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
 
@@ -12,14 +12,14 @@
             Dashboard <span class="sr-only">(current)</span>
         </a>
       </li>
-    
+
       <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.faculty')}}">
           <span data-feather="bar-chart-2"></span>
           Faculty
         </a>
       </li>
-    
+
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -40,7 +40,7 @@
           <span data-feather="plus-square"></span>
           Add New
         </a>
-      </li> 
+      </li>
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -62,7 +62,7 @@
           Add New
         </a>
       </li>
-      
+
     </ul>
   </div>
 </nav>
@@ -82,7 +82,7 @@
     @endif
     <div class="card">
         <div class="card-header bg-white text-center text-info">
-          <h5 class="m-0 font-weight-bold">Create Account For Clearance Officer</h5> 
+          <h5 class="m-0 font-weight-bold">Create Account For Clearance Officer</h5>
         </div>
 
         <div class="card-body">
@@ -90,8 +90,13 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="name">{{ __('Name') }}</label>
-                    <input id="name" type="text" class="form-control" name="name"  required autofocus>
+                    <label for="name">{{ __('First Name') }}</label>
+                    <input id="name" type="text" class="form-control" name="first_name"  required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">{{ __('Last Name') }}</label>
+                    <input id="lastname" type="text" class="form-control" name="last_name"  required autofocus>
                 </div>
 
                 <div class="form-group">
@@ -108,7 +113,7 @@
                 <div class="form-group">
                     <label for="password-confirm">{{ __('Confirm Password') }}</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
- 
+
                 </div>
 
                 <label for="">Head of:</label><br>

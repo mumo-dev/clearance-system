@@ -18,7 +18,7 @@
                         @csrf
                         <div class="form-group">
                             <label>Name:</label>
-                            <input type="text" name="name" class="form-control" value={{Auth::user()->name}} disabled>
+                            <input type="text" name="name" class="form-control" value='{{Auth::user()->name}}' disabled>
                         </div>
 
                         <div class="form-group">
@@ -45,7 +45,7 @@
                             <label>Department:</label>
                             <select name="department" class="form-control" id="sel_depart" required>
                                 <option value="" selected disabled>Choose ...</option>
-                               
+
                             </select>
                         </div>
 
@@ -57,7 +57,7 @@
                         <div class="form-group">
                           <button type="submit" class="btn btn-success">Create</button>
                         </div>
-                    
+
                     </form>
 
                 </div>
@@ -76,11 +76,11 @@
              var len = response.length;
 
             $("#sel_depart").empty();
-            
+
             for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
-                
+
                 $("#sel_depart").append("<option value='"+id+"'>"+name+"</option>");
 
             }
