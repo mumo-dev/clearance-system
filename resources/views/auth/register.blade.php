@@ -54,6 +54,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="regno" class="col-md-4 col-form-label text-md-right">{{ __('Registration Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="regno" type="text" class="form-control{{ $errors->has('regno') ? ' is-invalid' : '' }}" name="regno" value="{{ old('regno') }}"  autofocus>
+
+                                @if ($errors->has('regno'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('regno') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

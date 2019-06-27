@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-   
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -74,8 +74,33 @@
         <main class="py-4">
             @yield('content')
         </main>
-       
+
     </div>
       <script src="{{ asset('js/app.js') }}" ></script>
+      <script>
+          function fetchCourses(){
+            var departmentId = $("#sel_depart").val();
+            // alert(departmentId);
+            $.ajax({
+            url: '/courses/'+ departmentId,
+            type: 'get',
+            dataType: 'json',
+            success: function(response){
+                console.log(response)
+                var len = response.length;
+
+                $("#sel_course").empty();
+
+                for( var i = 0; i<len; i++){
+                    var id = response[i]['id'];
+                    var name = response[i]['name'];
+
+                    $("#sel_course").append("<option value='"+id+"'>"+name+"</option>");
+
+                }
+            }
+            })
+        }
+        </script>
 </body>
 </html>

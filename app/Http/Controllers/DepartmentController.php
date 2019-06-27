@@ -12,7 +12,7 @@ use App\Clearance;
 
 class DepartmentController extends Controller
 {
-    
+
 
     public function index()
     {
@@ -28,12 +28,12 @@ class DepartmentController extends Controller
             $department_name = AcademicDepartment::find($incharge->officeable_id)->name;
             $department_title = 'Department - '. $department_name;
 
-          
+
         }else if($incharge->officeable_type=="App\Department"){
             $department_name = Department::find($incharge->officeable_id)->name;
             $department_title = 'Department - '. $department_name;
 
-           
+
         }
 
         //
@@ -63,10 +63,10 @@ class DepartmentController extends Controller
             $department_name = AcademicDepartment::find($incharge->officeable_id)->name;
             $department_title = 'Department - '. $department_name;
 
-          
+
         }else if($incharge->officeable_type=="App\Department"){
             $department_name = Department::find($incharge->officeable_id)->name;
-            $department_title = 'Department - '. $department_name; 
+            $department_title = 'Department - '. $department_name;
         }
 
         $reports = Clearance::with(['student','clearedBy'])
@@ -75,7 +75,7 @@ class DepartmentController extends Controller
                             ->get();
 
 
-                        
+
         // return ;
         return view('departments.report', compact('reports','department_title'));
     }
@@ -84,7 +84,7 @@ class DepartmentController extends Controller
     {
         $user = auth()->user();
         $incharge = $user->inchargeOf;
-        
+
         if($incharge->officeable_type=="App\Faculty"){
 
             $faculty_name = Faculty::find($incharge->officeable_id)->name;
@@ -94,16 +94,16 @@ class DepartmentController extends Controller
             $department_name = AcademicDepartment::find($incharge->officeable_id)->name;
             $department_title = 'Department - '. $department_name;
 
-          
+
         }else if($incharge->officeable_type=="App\Department"){
             $department_name = Department::find($incharge->officeable_id)->name;
             $department_title = 'Department - '. $department_name;
 
-           
+
         }
 
         $clearance = Clearance::with('student')->findOrFail($id);
-        if($clearance->departmentable_type == $incharge->officeable_type  && 
+        if($clearance->departmentable_type == $incharge->officeable_type  &&
             $clearance->departmentable_id == $incharge->officeable_id ){
 
             return view('departments.clear', compact('clearance', 'department_title'));
@@ -132,5 +132,36 @@ class DepartmentController extends Controller
         $clearance->save();
 
         return redirect()->route('department.home')->withMessage('Student clearance status updated successfully ');
+    }
+
+    public function generatePdf()
+    {
+        $user = auth()->user();
+        $incharge = $user->inchargeOf;
+
+        if($incharge->officeable_type=="App\Faculty"){
+
+            $faculty_name = Faculty::find($incharge->officeable_id)->name;
+            $department_title = 'Faculty - '. $faculty_name;
+
+        }else if($incharge->officeable_type=="App\AcademicDepartment"){
+            $department_name = AcademicDepartment::find($incharge->officeable_id)->name;
+            $department_title = 'Department - '. $department_name;
+
+
+        }else if($incharge->officeable_type=="App\Department"){
+            $department_name = Department::find($incharge->officeable_id)->name;
+            $department_title = 'Department - '. $department_name;
+        }
+
+        $reports = Clearance::with(['student','clearedBy'])
+                            ->where("departmentable_type",$incharge->officeable_type)
+                            ->where("departmentable_id", $incharge->officeable_id)
+                            ->get();
+
+
+
+        // return ;
+        return view('departments.report-pdf', compact('reports','department_title'));
     }
 }

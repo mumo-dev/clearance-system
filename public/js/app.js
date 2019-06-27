@@ -36991,7 +36991,15 @@ var render = function() {
           "div",
           [
             _c("strong", { staticClass: "p-2" }, [_vm._v("Status:")]),
-            _vm._v(" " + _vm._s(_vm.clearance.status) + " "),
+            _vm._v(
+              " " +
+                _vm._s(
+                  _vm.clearance.status == "pending"
+                    ? "Clearance Officer will clear you soon"
+                    : _vm.clearance.status
+                ) +
+                " "
+            ),
             _c("br"),
             _vm._v(" "),
             _vm.clearance.remarks
@@ -49481,8 +49489,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-apps\clearance\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-apps\clearance\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\clearance\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\clearance\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

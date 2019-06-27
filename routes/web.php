@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/faculties/{id}', 'HomeController@getDepartments');
 
+Route::get('/courses/{id}', 'HomeController@getCourses');
+
 //student routes
 Route::group(['middleware'=>['auth', 'student']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
@@ -35,6 +37,7 @@ Route::group(['middleware'=>['auth', 'student']], function(){
 Route::group(['middleware'=>['auth', 'department']], function(){
     Route::get('/department', 'DepartmentController@index')->name('department.home');
     Route::get('/department/reports', 'DepartmentController@reports')->name('department.reports');
+    Route::get('/department/reports/generate','DepartmentController@generatePdf');
     Route::get('/department/clear/{id}', 'DepartmentController@clearStudent');
     Route::post('/department/clear/', 'DepartmentController@updateClearanceStatus')->name('department.clear');
 });
@@ -54,6 +57,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'admin']], function(){
     Route::get('/accounts/create', 'Admin\AccountsController@create')->name('admin.accounts.create');
 
     Route::get('/departments', 'Admin\AccountsController@department')->name('admin.department');
+    Route::get('/course', 'Admin\AccountsController@courses')->name('admin.course');
+    Route::post('/course', 'Admin\AccountsController@storeCourse')->name('admin.store-course');
+
     Route::post('/department/academic/delete', 'Admin\AccountsController@deleteAcademicDepartment')->name('admin.academicdept.delete');
     Route::post('/department/non-academic/delete', 'Admin\AccountsController@deleteDepartment')->name('admin.department.delete');
     Route::post('/departments', 'Admin\AccountsController@storeDepartment')->name('admin.store-department');

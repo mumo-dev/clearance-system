@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Faculty;
+use App\Course;
 use App\AcademicDepartment;
 use App\Student;
 use App\Department;
@@ -36,7 +37,7 @@ class HomeController extends Controller
 
         $departments = Department::all();
 
-        
+
         return view('home', compact('departments'));
     }
 
@@ -55,15 +56,19 @@ class HomeController extends Controller
     }
 
 
+    public function getCourses($id)
+    {
+        $courses = Course::where('department_id', $id)->get();
+        return $courses;
+    }
+
+
     public function saveProfile(Request $request)
     {
-        $this->validate($request,[
-            'regno'=>'required|string|regex:/^([A-Z])+([0-9])+\/([0-9]){5}\/([0-9]){2}$/i'
-        ]);
 
         Student::create([
             'user_id'=>auth()->user()->id,
-            'regno'=>$request->regno,
+            'regno'=>auth()->user()->regno,
             'course'=>$request->course,
             'faculty_id'=> $request->faculty,
             'department_id'=>$request->department

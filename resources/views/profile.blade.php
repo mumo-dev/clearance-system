@@ -23,12 +23,8 @@
 
                         <div class="form-group">
                             <label>Registration Number:</label>
-                            <input type="text" name="regno" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required>
-                             @if ($errors->has('regno'))
-                                  <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('regno') }}</strong>
-                                  </span>
-                            @endif
+                            <input type="text" name="regno" class="form-control" value='{{Auth::user()->regno}}' disabled >
+
                         </div>
 
                         <div class="form-group">
@@ -43,7 +39,7 @@
 
                         <div class="form-group">
                             <label>Department:</label>
-                            <select name="department" class="form-control" id="sel_depart" required>
+                            <select name="department" class="form-control" id="sel_depart" onchange="fetchCourses()" required>
                                 <option value="" selected disabled>Choose ...</option>
 
                             </select>
@@ -51,7 +47,11 @@
 
                          <div class="form-group">
                             <label>Course:</label>
-                            <input type="text" name="course" class="form-control" placeholder="eg. Bsc. Computer Science" required>
+                            {{-- <input type="text" name="course" class="form-control" placeholder="eg. Bsc. Computer Science" required> --}}
+                            <select name="course" class="form-control" id="sel_course" required>
+                                <option value="" selected disabled>Choose ...</option>
+
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -87,6 +87,8 @@
           }
         })
       }
+
+
     </script>
 </div>
 @endsection

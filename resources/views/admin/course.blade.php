@@ -36,14 +36,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="{{ route('admin.department.create')}}">
+        <a class="nav-link " href="{{ route('admin.department.create')}}">
           <span data-feather="plus-square"></span>
           Add New
         </a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link" href="/admin/course">
+        <a class="nav-link active" href="/admin/course">
           <span data-feather="plus-square"></span>
           Add Course
         </a>
@@ -90,34 +89,22 @@
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
-          <div class="card-header bg-white"> <h5 class="m-0">Add Department</h5></div>
+          <div class="card-header bg-white"> <h5 class="m-0">Add Course</h5></div>
             <div class="card-body">
-              <form method="POST" action="{{ route('admin.store-department')}}">
+              <form method="POST" action="{{ route('admin.store-course')}}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" class="form-control" placeholder="Department name" required/>
+                    <input type="text" name="name" class="form-control" placeholder="Course Name" required/>
                 </div>
 
 
-                  <label for="">Department Category:</label><br>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="inlineRadio1" name="is_academic" value="academic" required>
-                    <label class="form-check-label" for="inlineRadio1">Academic</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio"  id="inlineRadio2" name="is_academic" value="nonacademic" required>
-                    <label class="form-check-label" for="inlineRadio2">Non Academic</label>
-                  </div>
-
-                  <div class="form-group d-none" id="faculty">
-                    <label for="name">Faculty:</label>
-                    <select class="form-control" name="faculty">
-                        <option value="" selected disabled>choose faculty...</option>
-                        @foreach ($faculties as $faculty)
-                              <option value="{{ $faculty->id}}">{{ $faculty->name }}</option>
+                <div class="form-group">
+                    <label for="name">Department:</label>
+                    <select class="form-control" name="department">
+                        <option value="" selected disabled>choose department...</option>
+                        @foreach ($departments as $department)
+                              <option value="{{ $department->id}}">{{ $department->name }}</option>
                         @endforeach
                     </select>
                 </div>

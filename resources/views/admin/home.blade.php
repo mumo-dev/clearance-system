@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('sidebar')
-  
+
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
 
@@ -12,14 +12,14 @@
             Dashboard <span class="sr-only">(current)</span>
         </a>
       </li>
-    
+
       <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.faculty')}}">
           <span data-feather="bar-chart-2"></span>
           Faculty
         </a>
       </li>
-    
+
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -40,7 +40,15 @@
           <span data-feather="plus-square"></span>
           Add New
         </a>
-      </li> 
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/course">
+          <span data-feather="plus-square"></span>
+          Add Course
+        </a>
+      </li>
+
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -62,7 +70,7 @@
           Add New
         </a>
       </li>
-      
+
     </ul>
   </div>
 </nav>

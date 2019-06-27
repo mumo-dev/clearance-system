@@ -10,14 +10,14 @@
         </div>
 
         <div v-if="cleared">
-            <strong class="p-2">Status:</strong> {{clearance.status }} <br>
+            <strong class="p-2">Status:</strong> {{clearance.status=='pending'?'Clearance Officer will clear you soon':clearance.status }} <br>
 
             <template v-if="clearance.remarks">
                 <strong class="p-2" >Remarks:</strong>
                 {{clearance.remarks }}
 
             </template>
-        </div> 
+        </div>
 
     </div>
 </template>
@@ -50,7 +50,7 @@
                         this.loaded = true;
                     }
                 }).catch((err) => {
-                    
+
                 });
             },
 
@@ -59,12 +59,15 @@
                 .then(({data}) => {
                     if(data.message=="success"){
                        this.cleared = this.loaded =true;
-                       this.clearance = data.clearance
+
+                        this.clearance = data.clearance;
+
+
 
                        console.log(data);
                     }
                 }).catch((err) => {
-                    
+
                 });
             }
 

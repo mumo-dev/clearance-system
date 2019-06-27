@@ -10,6 +10,7 @@ use App\Faculty;
 use App\Department;
 use App\AcademicDepartment;
 use App\User;
+use App\Course;
 use App\ClearanceOfficer;
 
 
@@ -91,6 +92,21 @@ class AccountsController extends Controller
         return view('admin.department', compact('academicDepartments','departments'));
     }
 
+    public function courses()
+    {
+        $departments = AcademicDepartment::all();
+        return view('admin.course', compact('departments'));
+    }
+
+    public function storeCourse(Request $request)
+    {
+        Course::create([
+            'name'=> $request->name,
+            'department_id'=>$request->department,
+        ]);
+
+        return redirect()->back()->withMessage('Course added successfully');
+    }
 
     public function addDepartment()
     {
